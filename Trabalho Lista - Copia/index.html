@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lista de presentes</title>
+        <meta charset="UTF-8">
+        <script>
+		//localStorage.clear();
+			var id = localStorage.length;
+			function novaLista(){
+				var localStorage[id] = document.getElementById("novo").value;
+				alert("here");
+			}
+			function mostraListas(){
+				document.getElementById("mostraListas").innerHTML = "";
+				for (var chave in localStorage){
+					document.getElementById("mostraListas").innerHTML+= localStorage.getItem(chave)+"<br>";
+				}
+			}
+			function adiciona(){
+				localStorage[id] = document.getElementById("novo").value;
+				id++;
+				listaPresentes();
+			}
+		</script>
+    	<body onload="mostraListas()">
+    		<div>  Nova Lista </div>
+    		<textarea  id="novo"></textarea>
+        	<button onclick="novaLista()"> Adiciona nova Lista </button>
+        	<div id="mostraListas">Minhas Listas </div>
+    	</body>
+</head>
+</html>
+
+  

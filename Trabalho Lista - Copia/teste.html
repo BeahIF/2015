@@ -1,0 +1,233 @@
+<html>
+	<head>
+		<script>
+		//para trabalhar com localstorage usa-se string, o JSON.parse e para salvar usa-se o JSON.stringify
+		//localStorage.clear();
+		var cont = 0;
+		var cont2 = 0;
+		function novaLista(){
+			var x = prompt("Digite o titulo da lista:");
+			var novaLista = {"codigo": cont, "nome": x,  "presentes": []};
+			localStorage[localStorage.length] = JSON.stringify(novaLista);
+			cont = cont + 1;
+		
+		}
+		function listarListas(){
+			/*document.getElementById("mostraListas").innerHTML = "";
+			for ( key in localStorage){
+				document.getElementById("mostraListas").innerHTML+= localStorage.getItem(e)+"<br>";
+			}*/
+			for (key in localStorage){
+
+				alert(JSON.parse(localStorage.getItem(key)).codigo +" -"+ JSON.parse(localStorage.getItem(key)).nome);
+			}
+		}
+		function novoPresente(){
+			var codLista = prompt("Digite o código da lista");
+			var x = prompt("Digite o nome do presente:");
+			var lista = JSON.parse(localStorage.getItem(codLista));
+		//	alert(parseInt(lista.length));
+			//var novopresente = x;
+			//var codigo = JSON.stringify(lista.codigo);
+			//alert(codigo);
+			//alert(JSON.stringify(localStorage.getItem(codLista)));
+			//	var tamanho = parseInt(codigo) + 1;
+			//alert(tamanho);
+			var novopresente = {"codigo" : cont2, "nome" : x};
+			
+			lista.presentes.push(novopresente);
+			localStorage.setItem(codLista, JSON.stringify(lista));
+			var adicionadenovo = prompt("Deseja adicionar esse presente a outra lista: Digite 1 para SIM e 0 para NAO");
+			if(adicionadenovo == 1){
+				codLista = prompt("Digite o código da lista");
+				var lista = JSON.parse(localStorage.getItem(codLista));
+				lista.presentes.push(novopresente);
+				localStorage.setItem(codLista, JSON.stringify(lista));
+			}
+			cont2 = cont2 + 1;
+		}
+		
+		function listarPresentes(){
+			document.getElementById("divao").innerHTML = "";
+			for (key in localStorage){
+				
+				for (var i = 0; i < localStorage.length-1; i++) {
+				//alert("mas entao");
+				var lista = JSON.parse(localStorage.getItem(key));
+				//alert(JSON.stringify(lista));
+
+				//alert(lista.nome);
+				var listap = JSON.parse(localStorage.getItem(key)).presentes;
+				//alert(JSON.stringify(listap));
+				//var tamanho = listap.length;
+				//alert(tamanho);
+			//if(listap.length != 0){
+				//alert(lista.size());
+				//var codigo = JSON.stringify(listap.codigo);
+				//if(codigo >= 0){
+				//alert(localStorage.length);
+				
+					//alert("here");
+					if(listap.length > 0){
+						//var texto = lista.nome+"->"+listap[i]
+						//document.getElementById("divao").innerHTML = "";
+						document.getElementById("divao").innerHTML+= lista.nome +"<br>";
+						for (var j = 0; j < listap.length; j++) {
+							var nome = JSON.stringify(listap[j].nome);
+							var codigo = JSON.stringify(listap[j].codigo);
+							document.getElementById("divao").innerHTML += listap[j].nome +
+							"<br>"+"<button onclick='migrar(" + nome +","+ codigo + "," + key+")'>Migrar para outra lista</button>"+ "   "+"<button onclick='copiar(" + nome +"," + codigo + ","+ key+")'> Copiar para outra lista</button>"+ "     " +"<button onclick='removerPresente(" + nome +","+ codigo + "," + key+")'>Remover da lista</button>" + "      "+"<button onclick='editaPresente(" + nome +","+ codigo + "," + key+")'>Editar Presente</button>" + "<br>";
+						}
+						//alert(lista.nome +" ->" listap[i].nome);
+					}}}}
+					function editaPresente(nome, codPresente, codLista){
+						var novoNome = prompt("Digite o novo nome do Presente:");
+						//alert(novoNome);
+						var lista = JSON.parse(localStorage.getItem(codLista));
+						//alert(lista);
+						var listap = lista.presentes;
+						var presente = {"codigo": codPresente, "nome": novoNome};
+						listap[codPresente] = presente;
+						lista.presentes = listap;
+						localStorage.setItem(codLista, JSON.stringify(lista));
+						listarPresentes();	
+
+											}
+			//	}
+				//alert(presente.nome);
+				//var presentes = JSON.parse(localStorage.getItem(key).presentes);
+				//alert(presentes.descricao);
+				//var lista = localStorage.getItem(key);
+				//alert(JSON.stringify(lista));
+				/*
+				for (var i = 0; i < lista.presentes.length; i++) {
+					var presente = lista.presentes[i];
+					alert(presente.descricao);
+				}*/
+				//alert(JSON.parse(localStorage.getItem(key)).codigo +"-"+ JSON.parse(localStorage.getItem(key)).nome + " TEM OS SEGUINTES Presentes:" + JSON.parse(localStorage.getItem(key)).presentes);
+			
+		function copiar(nome, codPresente, codLista){
+			//alert(nome);
+			//alert(codLista);
+			var codListaDestino = prompt("Digite o codigo da lista que deseja adiciona-lo!");
+			var listaDestino = JSON.parse(localStorage.getItem(codListaDestino));
+			var listap = listaDestino.presentes;	
+			var presente = {"codigo": listap.length, "nome": nome};
+			listap[listap.length] = presente;
+			//alert(listap);
+			listaDestino.presentes = listap;
+			localStorage.setItem(codListaDestino, JSON.stringify(listaDestino));
+			listarPresentes();	
+		}
+		function migrar(nome, codPresente ,codLista){
+			//alert(nome);
+			//alert(codLista);
+			var codListaDestino = prompt("Digite o codigo da lista que deseja adiciona-lo!");
+			var listaDestino = JSON.parse(localStorage.getItem(codListaDestino));
+			var listap = listaDestino.presentes;	
+			var presente = {"codigo": listap.length, "nome": nome};
+			listap[listap.length] = presente;
+			//alert(listap);
+			listaDestino.presentes = listap;
+			localStorage.setItem(codListaDestino, JSON.stringify(listaDestino));
+			removerPresente(nome, codPresente, codLista);
+			listarPresentes();	
+
+		}
+
+			function removerPresente(nome, codPresente, codLista){
+			var lista = JSON.parse(localStorage.getItem(codLista));		
+			var listap = lista.presentes;
+			var listapnovo = [];
+			for (var i = 0; i < listap.length; i++) {
+				if(i != codPresente){					
+					var obj = {"codigo": listapnovo.length, "nome": listap[i].nome};
+					listapnovo[listapnovo.length] = obj;
+				}
+			}
+			lista.presentes = listapnovo;
+			localStorage.setItem(codLista, JSON.stringify(lista));
+			listarPresentes();	
+		}
+		/*function removerPresentes(){
+			var codLista = prompt("Digite o código da lista que o presente será removido");
+
+			var presentedigitado = prompt("Digite o nome do presete que deseja excluir");
+			
+			var lista = JSON.parse(localStorage.getItem(codLista));		
+			var listap = lista.presentes;
+
+			var codPresente = parseInt(prompt("Digite o código do presente"));
+
+
+			//listap.splice(parseInt(prompt("dfdffdf")), 1);
+						
+			var listapnovo = [];
+			for (var i = 0; i < listap.length; i++) {
+				if(i != codPresente){					
+					var obj = {"codigo": listapnovo.length, "nome": listap[i].nome};
+					listapnovo[listapnovo.length] = obj;
+				}
+			}
+			lista.presentes = listapnovo;
+			localStorage.setItem(codLista, JSON.stringify(lista));
+		}
+*/
+		function removeLista(){
+			var codLista = prompt("Digite o código da lista que será removido");
+
+			localStorage.removeItem(codLista);
+			listarPresentes();	
+		}
+
+		function editaLista(){
+			var codLista = prompt("Digite o códgio da lista que será editado:");
+			var lista = JSON.parse(localStorage.getItem(codLista));
+			for (var i = 0; i < localStorage.length; i++) {
+				if(i == codLista){
+					var nome = prompt("Digite o novo nome da lista");
+					lista.nome = nome;
+					listarListas();
+				}
+			}
+			localStorage.setItem(codLista, JSON.stringify(lista));
+			listarPresentes();	
+		}
+
+		function ajax() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                alert(JSON.parse(xhttp.responseText).current.temp_c + "graus Celsius");
+            }
+          };
+          xhttp.open("GET", "http://api.apixu.com/v1/current.json?key=aa0002e2ed2a408584f23913162406&q=Paris", true);       
+        // xhttp.open("GET", "recebe.php?parametro=Igor", true);
+          xhttp.send();
+        }
+		</script>
+		<link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="bootstrap-3.3.6-dist/css" type="text/html">
+		<body>
+<!--<div style="background-image: url('C:\Users\usuario\Downloads\IFRS 2016\Engenharia de Software\2º Bimestre\Trabalho Lista\images\p.jpg')">
+	--><p class="navbar-text" style="color:blue;margin-left:30px;font-size: 40px;">Minhas Listas de Presentes</p><br>
+		<div class="btn-group-vertical" role="group" aria-label="..." style="position:absolute; left:60; top:70;color:blue;font-size: 20px;">
+    		<div>  Nova Lista </div>
+			<button onclick="novaLista()" style="color:black; font-size: 15px;"> Adiciona nova Lista </button>
+        	<br><div id="mostraListas">Minhas Listas </div>
+        	<button onclick="listarListas()" style="color:black; font-size: 15px;">Mostra  </button>
+        	<br><div> Novo Presente </div>
+        	<button onclick="novoPresente()" style="color:black; font-size: 15px;"> Adiciona novo Presente </button>
+        	<br> <div> Meus Presentes </div>
+        	<button onclick="listarPresentes()" style="color:black; font-size: 15px;"> Lista presentes </button>
+        	<div id="divao"></div>
+    		<!--<br> <div> Remover Presente </div>
+        	<button onclick="removerPresentes()"> Remove presente </button>-->
+        	Revome lista
+        	<br><button onclick="removeLista()" style="color:black; font-size: 15px;"> Remove Lista </button>
+    		<br> Editar Lista
+    		<BR><button onclick="editaLista()" style="color:black; font-size: 15px;"> Edita Lista </button>
+    		<Br><br> <button type="button" onclick="ajax()">Clima em Paris</button>
+    	</div></div>
+    	</body>
+</html>

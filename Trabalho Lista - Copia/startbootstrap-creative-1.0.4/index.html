@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lista de Presentes</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button onclick="novaLista()"> Adiciona nova Lista </button>
+                    </li>
+                   <li>
+                       <button onclick="listarListas()">Mostra  </button>
+                    </li>
+                    <li>
+                        <button onclick="novoPresente()"> Adiciona novo Presente </button>
+                    </li>
+                    <li>
+                        <button onclick="listarPresentes()"> Listar presentes </button>
+                    </li>
+                    <li>
+                        <button type="button" onclick="ajax()">Clima em Paris</button>
+                    </li>
+                                    </ul>
+            </div> 
+            <!-- /.navbar-collapse --> 
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>Minhas Listas de Presentes</h1>
+                
+                
+                
+                <!--<a href="#about" class="btn btn-primary btn-xl page-scroll">NOVA LISTA</a> -->
+
+            </div>
+        </div>
+    </header><div id="divao"> </div>
+<!--
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">We've got what you need!</h2>
+                    <hr class="light">
+                    <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
+                    <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">At Your Service</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
+                        <h3>Sturdy Templates</h3>
+                        <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                        <h3>Ready to Ship</h3>
+                        <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                        <h3>Up to Date</h3>
+                        <p class="text-muted">We update dependencies to keep things fresh.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
+                        <h3>Made with Love</h3>
+                        <p class="text-muted">You have to make your websites with love these days!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter popup-gallery">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/1.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/1.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/2.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/2.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/3.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/3.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/4.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/4.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/5.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/5.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="img/portfolio/fullsize/6.jpg" class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/6.jpg" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Free Download at Start Bootstrap!</h2>
+                <a href="http://startbootstrap.com/template-overviews/creative/" class="btn btn-default btn-xl sr-button">Download Now!</a>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x sr-contact"></i>
+                    <p>123-456-6789</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/creative.js"></script>
+    <script> 
+            localStorage.clear();
+        var cont = 0;
+        var cont2 = 0;
+
+        function ajax() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                alert(JSON.parse(xhttp.responseText).current.temp_c);
+            }
+          };
+          xhttp.open("GET", "http://api.apixu.com/v1/current.json?key=aa0002e2ed2a408584f23913162406&q=Paris", true);       
+        // xhttp.open("GET", "recebe.php?parametro=Igor", true);
+          xhttp.send();
+        }
+        function novaLista(){
+            var x = prompt("Digite o titulo da lista:");
+            var novaLista = {"codigo": cont, "nome": x,  "presentes": []};
+            localStorage[localStorage.length] = JSON.stringify(novaLista);
+            cont = cont + 1;
+        
+        }
+        function listarListas(){
+            /*document.getElementById("mostraListas").innerHTML = "";
+            for ( key in localStorage){
+                document.getElementById("mostraListas").innerHTML+= localStorage.getItem(e)+"<br>";
+            }*/
+            for (key in localStorage){
+
+                alert(JSON.parse(localStorage.getItem(key)).codigo +" -"+ JSON.parse(localStorage.getItem(key)).nome);
+            }
+        }
+        function novoPresente(){
+            var codLista = prompt("Digite o código da lista");
+            var x = prompt("Digite o nome do presente:");
+            var lista = JSON.parse(localStorage.getItem(codLista));
+        //  alert(parseInt(lista.length));
+            //var novopresente = x;
+            //var codigo = JSON.stringify(lista.codigo);
+            //alert(codigo);
+            //alert(JSON.stringify(localStorage.getItem(codLista)));
+            //  var tamanho = parseInt(codigo) + 1;
+            //alert(tamanho);
+            var novopresente = {"codigo" : cont2, "nome" : x};
+            
+            lista.presentes.push(novopresente);
+            localStorage.setItem(codLista, JSON.stringify(lista));
+            var adicionadenovo = prompt("Deseja adicionar esse presente a outra lista: Digite 1 para SIM e 0 para NAO");
+            if(adicionadenovo == 1){
+                codLista = prompt("Digite o código da lista");
+                var lista = JSON.parse(localStorage.getItem(codLista));
+                lista.presentes.push(novopresente);
+                localStorage.setItem(codLista, JSON.stringify(lista));
+            }
+            cont2 = cont2 + 1;
+        }
+        
+        function listarPresentes(){
+            alert("ta aqui");
+            document.getElementById("divao").innerHTML = "";
+            for (key in localStorage){
+                for (var i = 0; i < localStorage.length-1; i++) {
+                var lista = JSON.parse(localStorage.getItem(key));
+                alert(JSON.stringify(lista));
+
+                //alert(lista.nome);
+                var listap = JSON.parse(localStorage.getItem(key)).presentes;
+                alert(JSON.stringify(listap));
+                //var tamanho = listap.length;
+                //alert(tamanho);
+            //if(listap.length != 0){
+                //alert(lista.size());
+                //var codigo = JSON.stringify(listap.codigo);
+                //if(codigo >= 0){
+                alert(localStorage.length);
+                
+                    alert("here");
+                    if(listap.length > 0){
+                        //var texto = lista.nome+"->"+listap[i]
+                        //document.getElementById("divao").innerHTML = "";
+                        document.getElementById("divao").innerHTML+= lista.nome +"<br>";
+                        for (var j = 0; j < listap.length; j++) {
+                            var nome = JSON.stringify(listap[j].nome);
+                            var codigo = JSON.stringify(listap[j].codigo);
+                            document.getElementById("divao").innerHTML += listap[j].nome +
+                            "<br>"+"<button onclick='migrar(" + nome +","+ codigo + "," + key+")'>Migrar para outra lista</button>"+ "   " +"<button onclick='copiar(" + nome +"," + codigo + ","+ key+")'> Copiar para outra lista</button>"+ "     " +"<button onclick='removerPresente(" + nome +","+ codigo + "," + key+")'>Remover da lista</button>" + "      "+"<button onclick='editaPresente(" + nome +","+ codigo + "," + key+")'>Editar Presente</button>" + "<br>";
+                        }
+                        //alert(lista.nome +" ->" listap[i].nome);
+                    }}}}
+                    function editaPresente(nome, codPresente, codLista){
+                        var novoNome = prompt("Digite o novo nome do Presente:");
+                        alert(novoNome);
+                        var lista = JSON.parse(localStorage.getItem(codLista));
+                        alert(lista);
+                        var listap = lista.presentes;
+                        var presente = {"codigo": codPresente, "nome": novoNome};
+                        listap[codPresente] = presente;
+                        lista.presentes = listap;
+                        localStorage.setItem(codLista, JSON.stringify(lista));
+                        listarPresentes();  
+
+                                            }
+            //  }
+                //alert(presente.nome);
+                //var presentes = JSON.parse(localStorage.getItem(key).presentes);
+                //alert(presentes.descricao);
+                //var lista = localStorage.getItem(key);
+                //alert(JSON.stringify(lista));
+                /*
+                for (var i = 0; i < lista.presentes.length; i++) {
+                    var presente = lista.presentes[i];
+                    alert(presente.descricao);
+                }*/
+                //alert(JSON.parse(localStorage.getItem(key)).codigo +"-"+ JSON.parse(localStorage.getItem(key)).nome + " TEM OS SEGUINTES Presentes:" + JSON.parse(localStorage.getItem(key)).presentes);
+            
+        function copiar(nome, codPresente, codLista){
+            alert(nome);
+            alert(codLista);
+            var codListaDestino = prompt("Digite o codigo da lista que deseja adiciona-lo!");
+            var listaDestino = JSON.parse(localStorage.getItem(codListaDestino));
+            var listap = listaDestino.presentes;    
+            var presente = {"codigo": listap.length, "nome": nome};
+            listap[listap.length] = presente;
+            alert(listap);
+            listaDestino.presentes = listap;
+            localStorage.setItem(codListaDestino, JSON.stringify(listaDestino));
+            listarPresentes();  
+        }
+        function migrar(nome, codPresente ,codLista){
+            alert(nome);
+            alert(codLista);
+            var codListaDestino = prompt("Digite o codigo da lista que deseja adiciona-lo!");
+            var listaDestino = JSON.parse(localStorage.getItem(codListaDestino));
+            var listap = listaDestino.presentes;    
+            var presente = {"codigo": listap.length, "nome": nome};
+            listap[listap.length] = presente;
+            alert(listap);
+            listaDestino.presentes = listap;
+            localStorage.setItem(codListaDestino, JSON.stringify(listaDestino));
+            removerPresente(nome, codPresente, codLista);
+            listarPresentes();  
+
+        }
+
+            function removerPresente(nome, codPresente, codLista){
+            var lista = JSON.parse(localStorage.getItem(codLista));     
+            var listap = lista.presentes;
+            var listapnovo = [];
+            for (var i = 0; i < listap.length; i++) {
+                if(i != codPresente){                   
+                    var obj = {"codigo": listapnovo.length, "nome": listap[i].nome};
+                    listapnovo[listapnovo.length] = obj;
+                }
+            }
+            lista.presentes = listapnovo;
+            localStorage.setItem(codLista, JSON.stringify(lista));
+            listarPresentes();  
+        }
+        /*function removerPresentes(){
+            var codLista = prompt("Digite o código da lista que o presente será removido");
+
+            var presentedigitado = prompt("Digite o nome do presete que deseja excluir");
+            
+            var lista = JSON.parse(localStorage.getItem(codLista));     
+            var listap = lista.presentes;
+
+            var codPresente = parseInt(prompt("Digite o código do presente"));
+
+
+            //listap.splice(parseInt(prompt("dfdffdf")), 1);
+                        
+            var listapnovo = [];
+            for (var i = 0; i < listap.length; i++) {
+                if(i != codPresente){                   
+                    var obj = {"codigo": listapnovo.length, "nome": listap[i].nome};
+                    listapnovo[listapnovo.length] = obj;
+                }
+            }
+            lista.presentes = listapnovo;
+            localStorage.setItem(codLista, JSON.stringify(lista));
+        }
+*/
+        function removeLista(){
+            var codLista = prompt("Digite o código da lista que será removido");
+            localStorage.removeItem(codLista);
+        }
+
+        function editaLista(){
+            var codLista = prompt("Digite o códgio da lista que será editado:");
+            var lista = JSON.parse(localStorage.getItem(codLista));
+            for (var i = 0; i < localStorage.length; i++) {
+                if(i == codLista){
+                    var nome = prompt("Digite o novo nome da lista");
+                    lista.nome = nome;
+                    listarListas();
+                }
+            }
+            localStorage.setItem(codLista, JSON.stringify(lista));
+        }
+        </script>
+</body>
+
+</html>
